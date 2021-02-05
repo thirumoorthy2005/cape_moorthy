@@ -33,8 +33,8 @@ public class AdminController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	@PostMapping("/admin/addUser")
-	public String addUserByAdmin(@RequestBody User user) {
+	@PostMapping("/addUser")
+	public String addUser(@RequestBody User user) {
 		String password = user.getPassword();
 		user.setPassword(passwordEncoder.encode(password));
 		userService.save(user);
@@ -42,8 +42,8 @@ public class AdminController {
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@GetMapping("/admin/fetchUser/{userName}")
-	public UserDetails loginUser(@PathVariable("userName") String userName) {
+	@GetMapping("/fetchUser/{userName}")
+	public UserDetails fetchUser(@PathVariable("userName") String userName) {
 		return userDetailsService.loadUserByUsername(userName);
 	}
 }
