@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.capeelectric.repository.UserRepository;
 import com.capeelectric.service.impl.CustomUserDetailsService;
@@ -41,7 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.authorizeRequests()
+        http.cors().and().
+        authorizeRequests()
                 .antMatchers("**/secured/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
@@ -54,11 +57,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         		.logoutSuccessUrl("/login?logout")
         		.permitAll();;
     }
-
+    
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
+            }
+        };
+    }
+    
     @Bean
     private BCryptPasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
-           
     }
 
 }

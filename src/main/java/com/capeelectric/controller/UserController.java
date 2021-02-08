@@ -21,7 +21,7 @@ import com.capeelectric.service.impl.UserDetailsServiceImpl;
  *
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class UserController {
 	
 	@Autowired
