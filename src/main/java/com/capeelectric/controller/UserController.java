@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.model.User;
+import com.capeelectric.request.AuthenticationRequest;
 import com.capeelectric.service.impl.CustomUserDetailsService;
 import com.capeelectric.service.impl.UserDetailsServiceImpl;
 
@@ -31,7 +30,7 @@ public class UserController {
 	private UserDetailsServiceImpl userService;
 	
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	public BCryptPasswordEncoder passwordEncoder;
 
 	@PostMapping("/addUser")
 	public String addUser(@RequestBody User user) {
@@ -42,8 +41,8 @@ public class UserController {
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@GetMapping("/fetchUser/{userName}")
-	public UserDetails fetchUser(@PathVariable("userName") String userName) {
-		return userDetailsService.loadUserByUsername(userName);
+	@PostMapping("/authenticate")
+	public UserDetails fetchUser(@RequestBody AuthenticationRequest request) {
+		return userDetailsService.loadUserByUsername(request.getEmail());
 	}
 }
