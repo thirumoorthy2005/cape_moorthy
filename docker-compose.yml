@@ -17,7 +17,7 @@ services:
   lv-inspection-db:
     image: mysql:8
     networks:
-      - lv-inspection-mysql
+      - lv-inspection-db
     environment:
       - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
       - MYSQL_DATABASE=lv_safety_verification
