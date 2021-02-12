@@ -20,10 +20,11 @@ public class AuthenticationRequest {
 		this.email = email;
 		this.password = password;
 	}
-	public String getEmail() {
+	
+	public String getUserName() {
 		return email;
 	}
-	public void setEmail(String email) {
+	public void setUserName(String email) {
 		this.email = email;
 	}
 	public String getPassword() {

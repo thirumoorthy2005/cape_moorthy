@@ -32,7 +32,7 @@ public class UserController {
 	@Autowired
 	public BCryptPasswordEncoder passwordEncoder;
 
-	@PostMapping("/addUser")
+	@PostMapping("/registerUser")
 	public String addUser(@RequestBody User user) {
 		String password = user.getPassword();
 		user.setPassword(passwordEncoder.encode(password));
@@ -43,6 +43,6 @@ public class UserController {
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/authenticate")
 	public UserDetails fetchUser(@RequestBody AuthenticationRequest request) {
-		return userDetailsService.loadUserByUsername(request.getEmail());
+		return userDetailsService.loadUserByUsername(request.getUserName());
 	}
 }

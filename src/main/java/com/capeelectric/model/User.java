@@ -58,6 +58,7 @@ public class User {
         this.id = users.getId();
         this.password = users.getPassword();
         this.userType = users.getUserType();
+        this.userName = users.getEmail();
     }
 
 	public int getId() {
@@ -109,11 +110,11 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return email;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String email) {
+		this.userName = email;
 	}
 	
 	public String getUserType() {
