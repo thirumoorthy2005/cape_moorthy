@@ -1,4 +1,5 @@
 FROM openjdk:8-jre-alpine as target
+RUN apt-get install maven 
 RUN mvn clean install
 VOLUME /tmp
 EXPOSE 10555
