@@ -4,6 +4,8 @@ services:
     image: LV-Safety-Verification
     ports:
       - "8082:8082"
+    networks:
+      - lv-inspection-db
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://lv-inspection-mysql:3306/lv_safety_verification?autoReconnect=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: "root"
@@ -23,3 +25,6 @@ services:
       - MYSQL_DATABASE=lv_safety_verification
     ports:
       - "3307:3306"
+      
+networks:
+  lv-inspection-db:
