@@ -1,13 +1,13 @@
 version: "3"
 services:
   lv-inspection-backend:
-    image: LV-Safety-Verification
+    image: lV-safety-verification
     ports:
       - "8082:8082"
     networks:
       - lv-inspection-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://lv-inspection-mysql:3306/lv_safety_verification?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://lv-inspection-db:3306/lv_safety_verification?autoReconnect=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: "root"
       SPRING_DATASOURCE_PASSWORD: "CapeElectricSoftware@2021"
     build:
