@@ -24,7 +24,7 @@ services:
       - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
       - MYSQL_DATABASE=lv_safety_verification
     ports:
-      - "3307:3306"
+      - "3306:3306"
       
 networks:
   lv-inspection-db:
