@@ -1,7 +1,7 @@
 version: "3"
 services:
   lv-inspection-backend:
-    image: lV-safety-verification
+    image: lv-safety-verification
     ports:
       - "8082:8082"
     networks:
