@@ -9,8 +9,8 @@ services:
       SPRING_DATASOURCE_USERNAME: "root"
       SPRING_DATASOURCE_PASSWORD: "CapeElectricSoftware@2021"
     build:
-      context: .
-      dockerfile: "Dockerfile"
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
       - lv-inspection-db
  
