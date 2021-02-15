@@ -25,6 +25,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
       - MYSQL_DATABASE=lv_safety_verification
+    ports:
+      - "3306:3306"
     command: --init-file /data/application/data.sql
     volumes:
         - ./data.sql:/data/application/data.sql
