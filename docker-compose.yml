@@ -17,10 +17,12 @@ services:
       - lv-inspection-db
  
   lv-inspection-db:
+    container_name: lv-inspection_db
     image: mysql:8
     networks:
       - lv-inspection-db
     environment:
+      - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
       - MYSQL_DATABASE=lv_safety_verification
     ports:
