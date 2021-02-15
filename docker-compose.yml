@@ -17,7 +17,7 @@ services:
       - lv-inspection-db
  
   lv-inspection-db:
-    container_name: lv-inspection_db
+    container_name: lv-inspection-db
     image: mysql:latest
     networks:
       - lv-inspection-db
