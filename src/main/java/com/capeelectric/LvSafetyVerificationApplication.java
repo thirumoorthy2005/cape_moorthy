@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.capeelectric.repository.UserRepository;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackageClasses = UserRepository.class)
 public class LvSafetyVerificationApplication {
 
 	public static void main(String[] args) {

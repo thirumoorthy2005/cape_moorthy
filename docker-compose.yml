@@ -1,35 +1,24 @@
 version: "3"
 services:
-  lv-inspection-backend:
-    image: lv-inspection-backend
-    ports:
-      - "8082:8082"
-    networks:
-      - lv-inspection-db
+  lv-inspection-db:
+    image: mysql:latest
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://lv-inspection-db:3306/lv_safety_verification?autoReconnect=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: "root"
-      SPRING_DATASOURCE_PASSWORD: "CapeElectricSoftware@2021"
+      - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
+      - MYSQL_DATABASE=lv_safety_verification
+      - MYSQL_USER=lvsafetyuser
+    ports:
+      - 3309:3306
+    command: --init-file /data/application/data-mysql.sql
+    volumes:
+        - ./data-mysql.sql:/data/application/data-mysql.sql
+   
+  lv-inspection-backend:
+    image: lv-inspection-backend:latest
+    ports:
+      - 8086:8086
+    restart: unless-stopped
     build:
       context: ./
       dockerfile: Dockerfile
     depends_on:
       - lv-inspection-db
- 
-  lv-inspection-db:
-    container_name: lv-inspection-db
-    image: mysql:latest
-    networks:
-      - lv-inspection-db
-    environment:
-      - MYSQL_USER=root
-      - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
-      - MYSQL_DATABASE=lv_safety_verification
-    ports:
-      - "3306:3306"
-    command: --init-file /data/application/data.sql
-    volumes:
-        - ./data.sql:/data/application/data.sql
-      
-networks:
-  lv-inspection-db:
