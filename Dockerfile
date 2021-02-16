@@ -1,17 +1,16 @@
-FROM openjdk:8
-FROM maven:alpine
-
-# image layer
-WORKDIR /capeelectric
-ADD pom.xml /capeelectric
-RUN mvn verify clean --fail-never
-
-COPY . /app
-RUN mvn -v
-RUN mvn clean install -DskipTests
-EXPOSE 8086
-VOLUME /tmp
-ADD target/LV-Safety-Verification-0.0.1-SNAPSHOT.jar LV-Safety-Verification-0.0.1-SNAPSHOT.jar
+FROM maven:3.6.0-jdk-8-alpine as build
+WORKDIR /app
 
 COPY . .
-ENTRYPOINT ["java", "-jar","LV-Safety-Verification-0.0.1-SNAPSHOT.jar"]
+
+WORKDIR /app/lv-safety-verification
+
+RUN mvn clean package -DskipTests=true
+
+FROM openjdk:8
+
+VOLUME /tmp
+COPY --from=build /app/lv-safety-verification/target/*.jar ./
+EXPOSE 8086
+COPY . .
+ENTRYPOINT ["java", "-jar","/app/LV-Safety-Verification-0.0.1-SNAPSHOT.jar"]
