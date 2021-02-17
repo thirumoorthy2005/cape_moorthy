@@ -15,9 +15,9 @@ jobs:
     steps:
     - name: Publish to Registry
       uses: CapeSoftwareTeam/lv-inspection-safety-backend@master
-    - name: Build the Docker images
-      run: docker-compose up -d
       with:
         name: lv-safety-verification
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Build the Docker images
+      run: docker-compose up -d
