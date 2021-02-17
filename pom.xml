@@ -73,10 +73,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
+<!-- 				<configuration>
 					<finalName>lv-safety-verification</finalName>
 				</configuration>
-			</plugin>
+ -->			</plugin>
 		</plugins>
 	</build>
 
