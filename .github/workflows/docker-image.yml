@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Publish to Registry
-      uses: CapeSoftwareTeam/lv-inspection-safety-backend@master
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
       with:
         name: lv-safety-verification
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
