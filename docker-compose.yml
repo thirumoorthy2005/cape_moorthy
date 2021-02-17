@@ -11,7 +11,11 @@ services:
     command: --init-file /data/application/data-mysql.sql
     volumes:
         - ./data-mysql.sql:/data/application/data-mysql.sql
-   
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=CapeElectricSoftware@2021 --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
   lv-inspection-backend:
     image: lv-inspection-backend:latest
     ports:
