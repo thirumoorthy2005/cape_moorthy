@@ -4,7 +4,7 @@ WORKDIR '/capeelectric'
 VOLUME /tmp
 COPY --from=buildenv /usr/src/app/target/lv-safety-verification.jar lv-safety-verification.jar
 EXPOSE 8086
-ENTRYPOINT ["java", "-jar","LV-Safety-Verification-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar","lv-safety-verification.jar"]
 
 
 #FROM openjdk:8
