@@ -14,13 +14,6 @@ jobs:
 
     steps:
     - name: Check Out Repo 
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
     - name: Build the Docker images
       run: docker-compose up -d
-      
-    - name: Publish to Registry
-      uses: CapeSoftwareTeam/lv-inspection-safety-backend@master
-      with:
-        name: lv-safety-verification
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
