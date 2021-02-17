@@ -5,17 +5,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=CapeElectricSoftware@2021
       - MYSQL_DATABASE=lv_safety_verification
-      - MYSQL_USER=lvsafetyuser
     ports:
-      - 3309:3306
-    command: --init-file /data/application/data-mysql.sql
-    volumes:
-        - ./data-mysql.sql:/data/application/data-mysql.sql
-    healthcheck:
-      test: "/usr/bin/mysql --user=root --password=CapeElectricSoftware@2021 --execute \"SHOW DATABASES;\""
-      interval: 2s
-      timeout: 20s
-      retries: 10
+      - 3306:3306
   lv-inspection-backend:
     image: lv-inspection-backend:latest
     ports:

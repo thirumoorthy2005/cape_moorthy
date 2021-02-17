@@ -57,30 +57,25 @@
 
 	<build>
 		<plugins>
-			<plugin><!-- don't pack the war  -->
+			<!-- <plugin>don't pack the war this is for aws code pipeline <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-war-plugin</artifactId> <executions> <execution> <id>default-war</id> 
+				<phase>none</phase> </execution> <execution> <id>war-exploded</id> <configuration> 
+				<webappDirectory>target/deploy</webappDirectory> <archiveClasses>true</archiveClasses> 
+				</configuration> <phase>prepare-package</phase> <goals> <goal>exploded</goal> 
+				</goals> </execution> </executions> </plugin> -->
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-war</id>
-						<phase>none</phase>
-					</execution>
-					<execution>
-						<id>war-exploded</id>
-						<configuration>
-							<webappDirectory>target/deploy</webappDirectory>
-							<archiveClasses>true</archiveClasses>
-						</configuration>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>exploded</goal>
-						</goals>
-					</execution>
-				</executions>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>lv-safety-verification</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
