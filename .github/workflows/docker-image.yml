@@ -18,7 +18,6 @@ jobs:
     - name: Build the Docker images
       run: docker-compose up -d
       
-    - uses: actions/checkout@master
     - name: Publish to Docker Repository
       uses: CapeSoftwareTeam/lv-inspection-safety-backend@@master
       with:
