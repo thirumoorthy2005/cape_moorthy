@@ -7,13 +7,3 @@ services:
       - MYSQL_DATABASE=lv_safety_verification
     ports:
       - 3306:3306
-  lv-inspection-backend:
-    image: lv-inspection-backend:latest
-    ports:
-      - 8086:8086
-    restart: unless-stopped
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    depends_on:
-      - lv-inspection-db

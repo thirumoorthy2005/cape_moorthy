@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: capeelectricsoftware/lv-safety-verification:latest
+        tags: capeelectricsoftware/lv-inspection-db:latest
