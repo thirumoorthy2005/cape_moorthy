@@ -54,7 +54,18 @@
 		</dependency>
 
 	</dependencies>
-
+	<profiles>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<activatedProperties>prod</activatedProperties>
+				 <maven.test.skip>true</maven.test.skip>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>
@@ -82,9 +93,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<finalName>lv-safety-verification</finalName>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
