@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.cors().and().
+        http.cors().and().requiresChannel().anyRequest().requiresSecure().and().
         authorizeRequests()
                 .antMatchers("**/api/**").authenticated()
                 .anyRequest().permitAll()
