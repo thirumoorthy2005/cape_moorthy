@@ -30,47 +30,48 @@ import com.capeelectric.service.impl.CustomUserDetailsService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-    private CustomUserDetailsService userDetailsService;
+	private CustomUserDetailsService userDetailsService;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	 auth.userDetailsService(userDetailsService)
-        .passwordEncoder(getPasswordEncoder());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService)
+		.passwordEncoder(getPasswordEncoder());
+	}
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable();
-        http.cors().and().requiresChannel().anyRequest().requiresSecure().and().
-        authorizeRequests()
-                .antMatchers("**/api/**").authenticated()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-        		.logout()
-        		.invalidateHttpSession(true)
-        		.clearAuthentication(true)
-        		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        		.logoutSuccessUrl("/login?logout")
-        		.permitAll();;
-    }
-    
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
-            }
-        };
-    }
-    
-    @Bean
-    public BCryptPasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+		http.csrf().disable();
+		http.cors().and().
+		authorizeRequests()
+		.antMatchers("/api/**").permitAll().and()
+		.authorizeRequests()
+		.antMatchers("/api/v1/**").
+		authenticated().anyRequest().hasAnyRole("ADMIN").and()
+		.formLogin().permitAll()
+		.and()
+		.logout()
+		.invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/login?logout")
+		.permitAll();;
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
+			}
+		};
+	}
+
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }
