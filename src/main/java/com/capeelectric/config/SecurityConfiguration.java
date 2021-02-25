@@ -49,14 +49,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/api/v1/**").
 		authenticated().anyRequest().hasAnyRole("ADMIN").and()
-		.formLogin().permitAll()
-		.and()
-		.logout()
-		.invalidateHttpSession(true)
-		.clearAuthentication(true)
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login?logout")
-		.permitAll();;
+		.formLogin().permitAll();
+//		.and()
+//		.logout()
+//		.invalidateHttpSession(true)
+//		.clearAuthentication(true)
+//		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//		.logoutSuccessUrl("/login?logout")
+//		.permitAll();;
 	}
 
 	@Bean

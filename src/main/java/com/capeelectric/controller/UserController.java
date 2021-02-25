@@ -2,7 +2,6 @@ package com.capeelectric.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.model.CustomUserDetails;
 import com.capeelectric.model.User;
 import com.capeelectric.request.AuthenticationRequest;
 import com.capeelectric.service.impl.CustomUserDetailsService;
@@ -43,7 +43,7 @@ public class UserController {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/authenticate")
-	public UserDetails fetchUser(@RequestBody AuthenticationRequest request) {
+	public CustomUserDetails fetchUser(@RequestBody AuthenticationRequest request) {
 		return userDetailsService.loadUserByUsername(request.getUserName());
 	}
 }

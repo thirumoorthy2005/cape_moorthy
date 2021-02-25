@@ -14,14 +14,20 @@ public class CustomUserDetails extends User implements UserDetails {
      */
 	private static final long serialVersionUID = 1L;
 
-	public CustomUserDetails(final User users) {
-        super(users);
-    }
+	private User user;
+	
+    public User getUser() {
+		return user;
+	}
 
-    @Override
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return getRoles()
+        return user.getRoles()
                 .stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
                 .collect(Collectors.toList());
@@ -29,12 +35,12 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return super.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return super.getEmail();
+        return user.getUserName();
     }
 
     @Override

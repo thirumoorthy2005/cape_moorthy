@@ -9,23 +9,23 @@ package com.capeelectric.request;
  */
 public class AuthenticationRequest {
 
-	private String email;
+	private String userName;
 	private String password;
 	
 	public AuthenticationRequest() {
 		
 	}
-	public AuthenticationRequest(String email, String password) {
+	public AuthenticationRequest(String userName, String password) {
 		super();
-		this.email = email;
+		this.userName = userName;
 		this.password = password;
 	}
 	
 	public String getUserName() {
-		return email;
+		return userName;
 	}
-	public void setUserName(String email) {
-		this.email = email;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;
