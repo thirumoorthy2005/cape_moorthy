@@ -48,6 +48,6 @@ public class UserController {
 	
 	@PostMapping("/authenticate")
 	public CustomUserDetails fetchUser(@RequestBody AuthenticationRequest request) {
-		return userDetailsService.loadUserByUsername(request.getUserName());
+		return userDetailsService.loadUserByUsername(request.getEmail());
 	}
 }
