@@ -5,7 +5,6 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +46,7 @@ public class UserController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@GetMapping("/authenticate")
+	@PostMapping("/authenticate")
 	public CustomUserDetails fetchUser(@RequestBody AuthenticationRequest request) {
 		return userDetailsService.loadUserByUsername(request.getUserName());
 	}
