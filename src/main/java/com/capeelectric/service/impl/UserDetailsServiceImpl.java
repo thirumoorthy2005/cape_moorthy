@@ -13,7 +13,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public void save(User user) {
-		userRepository.save(user);
+	public User save(User user) {
+		User userDetails = userRepository.save(user);
+		return userDetails;
 	}
 }

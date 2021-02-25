@@ -1,13 +1,16 @@
 package com.capeelectric.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.capeelectric.model.CustomUserDetails;
 import com.capeelectric.model.User;
@@ -34,14 +37,16 @@ public class UserController {
 	public BCryptPasswordEncoder passwordEncoder;
 
 	@PostMapping("/registerUser")
-	public String addUser(@RequestBody User user) {
+	public ResponseEntity<User> addUser(@RequestBody User user) {
 		String password = user.getPassword();
 		user.setPassword(passwordEncoder.encode(password));
-		userService.save(user);
-		return "user added successfully";
+		User createdUser = userService.save(user);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
+				path("/{id}").buildAndExpand(createdUser.getId()).toUri();
+		
+		return ResponseEntity.created(uri).build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/authenticate")
 	public CustomUserDetails fetchUser(@RequestBody AuthenticationRequest request) {
 		return userDetailsService.loadUserByUsername(request.getUserName());

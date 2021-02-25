@@ -1,17 +1,10 @@
 package com.capeelectric.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -41,9 +34,8 @@ public class User {
 	private String userName;
 	@Column(name="user_type")
 	private String userType;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+	@Column(name = "role")
+	private String role;
 
 	
 	public User() {
@@ -52,13 +44,13 @@ public class User {
     public User(User users) {
         this.active = users.isActive();
         this.email = users.getEmail();
-        this.roles = users.getRoles();
         this.firstName = users.getFirstName();
         this.lastName =users.getLastName();
         this.id = users.getId();
         this.password = users.getPassword();
         this.userType = users.getUserType();
         this.userName = users.getEmail();
+        this.role = users.getRole();
     }
 
 	public int getId() {
@@ -125,13 +117,14 @@ public class User {
 		this.userType = userType;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
+	
 	
 	
 }

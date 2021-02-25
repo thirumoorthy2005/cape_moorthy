@@ -1,5 +1,6 @@
 package com.capeelectric.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,8 @@ public class CustomUserDetails extends User implements UserDetails {
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return user.getRoles()
-                .stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+        return Arrays.stream(user.getRole().split(","))
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 
